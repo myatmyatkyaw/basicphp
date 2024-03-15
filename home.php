@@ -14,9 +14,32 @@
            <input type="submit" name="Login" value="Login">
         </form>
 
+        <form action="home.php" method="post">
+            <label>Username:</label>
+            <input type="text" name="username"><br>
+            <label>Age:</label>
+            <input type="text" name="age"><br>
+            <input type="submit" name="login" value="Log In"><br>
+        </form>
+
     </body>
 </html>
 <?php 
+if(isset($_POST["login"])){
+    $username = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS);
+    echo "hello {$username} <br>";
+
+    $age = filter_input(INPUT_POST,"age",FILTER_SANITIZE_NUMBER_INT);
+    if(empty($age)){
+        echo "not valid";
+    }
+    else{
+        echo "You are {$age} years old.";
+    }
+    
+}
+
+
 if(isset($_POST["Save"])){
     $foods = $_POST["foods"];
     if($foods){
@@ -45,4 +68,10 @@ function birth($name){
     echo "happy birthday {$name}";
 }
 birth("mmk");
+
+$name = "mmh";
+// $namer = strtoupper($name);
+// $namer = str_replace("m","",$name);
+$namer = strrev($name);
+echo "<br> {$namer}";
 ?>
